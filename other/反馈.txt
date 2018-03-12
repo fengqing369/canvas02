@@ -1,0 +1,24 @@
+老师讲的很详细,谢谢,老师上课讲的思路可以跟上,逻辑理解,就是自己不会写,感觉我就是练得少吧
+逻辑理解,就是自己不会写(抄一遍  把注释留下   什么都不要留   成功的标志: 什么都不看 从头写完)
+我们队新知识都是从O开始接触的 一天讲的东西不少了， 需要消化！
+    
+
+  
+绘制 X轴 Y轴 箭头那有点蒙
+希望从头把18的案例在讲一下
+
+
+
+forEach、 foreach、 $().each、 $.each、 还有PHP的foreach 都乱了，老师讲讲吧
+
+forEach(原生js 遍历数组的) 
+foreach(php中遍历数组的)
+$().each  jq中操作dom的
+    $('input[type="checkbox"]').each(function(i){
+      给每个input让多选框选中
+    })
+$.each(function(index,item){})    jq中遍历数组的方法
+for in 遍历对象的
+for of   es6
+map
+

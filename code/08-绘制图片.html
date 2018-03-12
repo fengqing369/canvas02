@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制图片</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器版本过低,请升级浏览器</canvas>
+
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext("2d");
+
+    // image 图片对象--内置对象
+    var img = new Image();//实力化
+    img.src = './image/pic.jpg';
+    // dx 代表图片距离canvas左上角的x距离
+    // dy 代表图片距离canvas左上角的y距离
+    // void ctx.drawImage(image, dx, dy);
+    // word 二进制数据
+    // 等图片加载完了 再去绘制到canvas
+    img.onload = function () {
+      // context.drawImage(img, 10, 10);
+      // context.drawImage(img, 10, 10, 240, 360);
+      //     void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      context.drawImage(img,40,40,40,40,0,0,120,142);
+
+      // image, 图片对象
+      //  sx, sy, 截取图像的左上角的坐标
+      //   sWidth, sHeight,截取图像的大小
+      //    dx, dy, 截取的图像距离canvas左上角的坐标
+      //     dWidth, dHeight 截取的图像在canvas上显示多大
+    }
+
+    // 1.实例化img对象
+    // 2.设置img的src属性
+    // 3.等待img图片加载完毕
+    // 4.利用drawImage()方法把图片绘制到canvas
+
+  </script>
+</body>
+
+</html>

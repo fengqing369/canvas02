@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>平移转换</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+   
+  <canvas width="600" height="400">您的浏览器版本过低,请升级浏览器</canvas>
+
+  <script>
+    // 1.获取canvas元素
+    var canvas = document.querySelector("canvas");
+    // 2.获取上下文
+    var context = canvas.getContext("2d");
+    // 依赖数据
+    var data = [12, 40, 22, 10, 14];
+
+    // 获取随机颜色
+    var getRandomColor = function () {
+      var r = Math.floor(Math.random() * 256);
+      var g = Math.floor(Math.random() * 256);
+      var b = Math.floor(Math.random() * 256);
+
+      return 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+
+
+    // 获取总和
+    var sum = 0;
+    data.forEach(function (item) {
+      sum += item;
+    })
+    // console.log(sum);
+
+    var startAngle = 0;
+
+    data.forEach(function (item, i) {
+
+      context.beginPath();
+      context.moveTo(canvas.width / 2, canvas.height / 2);
+      context.arc(canvas.width / 2, canvas.height / 2, 150, startAngle, startAngle + (item / sum * 2 * Math.PI));
+      context.closePath();
+      context.fillStyle = getRandomColor();
+      context.fill();
+
+      startAngle = startAngle + (item / sum * 2 * Math.PI)
+    })
+
+
+
+  </script>
+</body>
+
+</html>

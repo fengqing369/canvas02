@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>折线图</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器版本过低,请升级浏览器</canvas>
+
+  <script>
+    var canvas = document.querySelector("canvas");
+    // 功能: 根据数据来绘制折线图
+    // 1.准备数据
+    var data = [
+      { x: 100, y: 100 },
+      { x: 200, y: 120 },
+      { x: 300, y: 180 },
+      { x: 400, y: 300 },
+      { x: 500, y: 140 }
+    ];
+    // 2.设置属性
+    var LineChart = function () {
+      // 2.1 画笔
+      this.context = canvas.getContext('2d');
+      // 2.2 画布的宽高(如果元素行内有样式(node.style.属性)  如果元素行内没样式(window.getComputedStyle()))
+
+      // 只要该元素有width属性或者height属性 img  video
+      this.cWidth = canvas.width;
+      this.cHeight = canvas.height;
+      // 2.3 间隙
+      this.space = 20;
+      // 2.4 坐标原点
+      this.zeroX = this.space;
+      this.zeroY = this.cHeight - this.space;
+      // 2.5 箭头大小
+      this.arrow = 10;
+      // 2.6 数据点的大小
+      this.square = 8;
+    }
+    // 3.画坐标轴
+    LineChart.prototype.drawAxis = function () {
+
+      // 3.1 画X轴
+      this.context.beginPath();
+      // X轴的起始点
+      this.context.moveTo(this.zeroX, this.zeroY);
+      // X轴的终止点
+      this.context.lineTo(this.cWidth - this.space, this.zeroY);
+      this.context.lineTo(this.cWidth - this.space - this.arrow, this.cHeight - this.space - this.arrow / 2);
+      this.context.lineTo(this.cWidth - this.space - this.arrow, this.cHeight - this.space + this.arrow / 2);
+      this.context.lineTo(this.cWidth - this.space, this.zeroY);
+      // X轴描边
+      this.context.fill();
+      this.context.stroke();
+      // 3.2 画Y轴
+      this.context.beginPath();
+      this.context.moveTo(this.zeroX, this.zeroY);
+      this.context.lineTo(this.space, this.space);
+      this.context.lineTo(this.space - this.arrow / 2, this.space + this.arrow);
+      this.context.lineTo(this.space + this.arrow / 2, this.space + this.arrow);
+      this.context.lineTo(this.space, this.space);
+      this.context.fill();
+      this.context.stroke();
+    }
+
+    // new LineChart().drawAxis();
+
+    // 4.画单个数据点(数据绘制与正方形绘制参数的转换)
+    LineChart.prototype.drawSquare = function (data) {
+      this.context.beginPath();
+      this.context.fillRect(data.x - this.square / 2, data.y - this.square / 2, this.square, this.square);
+    }
+    // 5.转换数据
+    LineChart.prototype.transformData = function (data) {
+      // 5.0 缓存this(如果你写js的过程中 发现你的变量名 和js的关键字 必须冲突, 就在关键字前面加_(下划线)表示是你自己用的变量)
+      var _this = this;
+      // 5.1 提前准备一个空数组
+      var transformArray = [];
+      // 5.2 遍历传入的实参数组
+      data.forEach(function (item, index) {
+        // 5.3 转换数据
+        transformArray.push({
+          x: _this.space + item.x,
+          y: _this.zeroY - item.y
+        })
+      })
+
+
+      // 5.4 返回转换后的数据
+      return transformArray;
+    }
+
+    // console.log(new LineChart().transformData(data));
+
+    // 6.画多个数据点
+    LineChart.prototype.drawPoints = function (data) {
+      var _this = this;
+      // 6.1 转换数据
+      var newArr = this.transformData(data);
+      console.log(newArr);
+      // 6.2 遍历转换过数据的数组
+      newArr.forEach(function (item, index) {
+        // 6.3 把点画到canvas  item是对象
+        _this.drawSquare(item);
+        // 6.4 判断是否是第一个点
+        if (index == 0) {
+          // 画线(起点  终点)
+          _this.drawLine(_this.zeroX, _this.zeroY, item.x, item.y);
+        } else {
+          _this.drawLine(newArr[index - 1].x, newArr[index - 1].y, item.x, item.y);
+        }
+      })
+    }
+
+    // 7.画线
+    LineChart.prototype.drawLine = function(startX,startY,endX,endY){
+      // 开启新路径
+      this.context.beginPath();
+      // 起始点  
+      this.context.moveTo(startX,startY);
+      // 终止点
+      this.context.lineTo(endX,endY);
+      this.context.stroke();
+    }
+
+    // 8.初始化方法
+    LineChart.prototype.init = function(data){
+      this.drawAxis();
+      this.drawPoints(data);
+    }
+
+    new LineChart().init(data);
+  </script>
+</body>
+
+</html>

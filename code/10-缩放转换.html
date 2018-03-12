@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>平移转换</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器版本过低,请升级浏览器</canvas>
+
+ <script>
+   var canvas = document.querySelector("canvas");
+   var context = canvas.getContext("2d");
+
+  // 缩放转换 //
+  // scale(X,Y)
+  // 缩放会让路径所有都放大
+  // 如果不想让边框放大 只能模拟一个
+  context.scale(1,2);
+  
+  context.strokeRect(0,0,100,50);
+
+ </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制圆弧</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器不支持canvas 请升级浏览器</canvas>
+
+  <script>
+    // 1.获取canvas
+    var canvas = document.querySelector('canvas');
+    // 2.获取画笔
+    var context = canvas.getContext('2d');
+    // 3.画两条相交垂线
+    context.moveTo(0,canvas.height/2);
+    context.lineTo(canvas.width,canvas.height/2);
+    context.stroke();
+
+    context.beginPath();
+    context.moveTo(canvas.width/2,0);
+    context.lineTo(canvas.width/2,canvas.height);
+    context.stroke();
+    // 4.画圆弧
+    context.beginPath();
+
+    // context.arc(圆心X,圆心Y,半径,起始弧度,终止弧度,是否逆时针)
+    // 0PI = 0deg  0.5PI=90deg  1PI=180deg 2PI=360deg
+    // 1rad = 57.3度 数学中 
+    // 在这里 
+    context.arc(canvas.width/2,canvas.height/2,150,0,0.5*Math.PI);
+
+    // 描边
+    context.stroke();
+  </script>
+
+</body>
+
+</html>

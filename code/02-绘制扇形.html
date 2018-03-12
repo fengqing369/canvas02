@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制扇形</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器不支持canvas 请升级浏览器</canvas>
+
+  <script>
+    // 1.获取canvas
+    var canvas = document.querySelector('canvas');
+    // 2.获取画笔
+    var context = canvas.getContext('2d');
+    // 3.画两条相交垂线
+    context.moveTo(0,canvas.height/2);
+    context.lineTo(canvas.width,canvas.height/2);
+    context.stroke();
+
+    context.beginPath();
+    context.moveTo(canvas.width/2,0);
+    context.lineTo(canvas.width/2,canvas.height);
+    context.stroke();
+    // 4.画扇形
+    // 4.1 画条线
+    context.moveTo(canvas.width/2,canvas.height/2);
+    // 4.2 画圆弧(true 代表逆时针方向画  )
+    context.arc(canvas.width/2,canvas.height/2,150,0,0.9*Math.PI,true);
+    // 4.3 关闭路径
+    context.closePath();
+    // 4.4 描边
+    context.stroke();
+ 
+  </script>
+
+</body>
+
+</html>

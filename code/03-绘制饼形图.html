@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器不支持canvas 请升级浏览器</canvas>
+
+  <script>
+    var data = [123, 156, 47, 100, 80];
+
+    // 目标: data中的数据按照比例显示到饼图中
+
+    // 步骤: 
+
+    // 1.求数组元素的和
+    var sum = 0;
+    for (var i = 0; i < data.length; i++) {
+      sum += data[i];
+    }
+
+    console.log(sum);
+
+    // 2.设置一个起始弧度
+    var startAngle = 0;
+    // 3.画饼图
+    var canvas = document.querySelector('canvas');
+    var context = canvas.getContext('2d');
+    data.forEach(function (item) {
+      // 3.1 开启新路径
+      context.beginPath();
+      // 3.2 画线
+      context.moveTo(canvas.width / 2, canvas.height / 2);
+      // 3.3 画圆弧
+      context.arc(canvas.width / 2, canvas.height / 2, 150,startAngle,item/sum*Math.PI*2);
+      // 3.4 关闭路径
+      context.closePath();
+      // 3.5 描边
+      context.stroke();
+      // 重新赋值起始弧度
+      startAngle = startAngle + item/sum*Math.PI*2
+    })
+
+  </script>
+</body>
+
+</html>

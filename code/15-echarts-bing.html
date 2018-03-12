@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #echar {
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+    <!--  -->
+    <div id="echar"></div>
+
+  
+  <script src="./js/echarts.min.js"></script>
+  <script>
+   // 基于准备好的dom，初始化echarts实例
+   var myChart = echarts.init(document.getElementById('echar'));
+
+  //  准备option
+  option = {
+    title : {
+        text: '某站点用户访问来源',
+        subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['15-20岁','20-25岁','25-30岁','30-35岁','35-100岁']
+    },
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:12, name:'15-20岁'},
+                {value:30, name:'20-25岁'},
+                {value:22, name:'25-30岁'},
+                {value:10, name:'30-35岁'},
+                {value:12, name:'35-100岁'}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ // 使用刚指定的配置项和数据显示图表。
+ myChart.setOption(option);
+
+  </script>
+</body>
+</html>
